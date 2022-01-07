@@ -71,7 +71,7 @@ If you want to build the windows installer with `make deploy` you need [NSIS](ht
     sudo apt install nsis
 
 Acquire the source in the usual way:
-
+    cd /usr/src/
     git clone https://github.com/vuicoin-project/vuicoin.git
     cd vuicoin
 
@@ -97,7 +97,9 @@ unexpected behaviour during the build, such as Win32 error dialogs for missing l
 is to temporarily disable WSL support for Win32 applications.
 
 Build using:
-
+    cd /usr/src/
+    git clone https://github.com/vuicoin-project/vuicoin.git
+    cd vuicoin
     PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g') # strip out problematic Windows %PATH% imported var
     sudo bash -c "echo 0 > /proc/sys/fs/binfmt_misc/status" # Disable WSL support for Win32 applications.
     cd depends
@@ -120,7 +122,7 @@ executables to a directory on the Windows drive in the same directory structure
 as they appear in the release `.zip` archive. This can be done in the following
 way. This will install to `c:\workspace\vuicoin`, for example:
 
-    make install DESTDIR=/mnt/c/workspace/vuicoin
+    make install DESTDIR=/mnt/c/Users/XXXXXXXXX/vuicoin
 
 You can also create an installer using:
 
