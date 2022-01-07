@@ -105,7 +105,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
     widget->setFont(fixedPitchFont());
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a Litecoin address (e.g. %1)").arg(
+    widget->setPlaceholderText(QObject::tr("Enter a Vuicoin address (e.g. %1)").arg(
         QString::fromStdString(DummyAddress(Params()))));
     widget->setValidator(new BitcoinAddressEntryValidator(parent));
     widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));
@@ -114,7 +114,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
     // return if URI is not valid or is no bitcoin: URI
-    if(!uri.isValid() || uri.scheme() != QString("litecoin"))
+    if(!uri.isValid() || uri.scheme() != QString("vuicoin"))
         return false;
 
     SendCoinsRecipient rv;
@@ -178,7 +178,7 @@ QString formatBitcoinURI(const SendCoinsRecipient &info)
 {
     bool bech_32 = info.address.startsWith(QString::fromStdString(Params().Bech32HRP() + "1"));
 
-    QString ret = QString("litecoin:%1").arg(bech_32 ? info.address.toUpper() : info.address);
+    QString ret = QString("vuicoin:%1").arg(bech_32 ? info.address.toUpper() : info.address);
     int paramCount = 0;
 
     if (info.amount)
@@ -586,10 +586,10 @@ fs::path static StartupShortcutPath()
 {
     std::string chain = gArgs.GetChainName();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Litecoin.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Vuicoin.lnk";
     if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Litecoin (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Litecoin (%s).lnk", chain);
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Vuicoin (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Vuicoin (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -669,8 +669,8 @@ fs::path static GetAutostartFilePath()
 {
     std::string chain = gArgs.GetChainName();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "litecoin.desktop";
-    return GetAutostartDir() / strprintf("litecoin-%s.desktop", chain);
+        return GetAutostartDir() / "vuicoin.desktop";
+    return GetAutostartDir() / strprintf("vuicoin-%s.desktop", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -714,9 +714,9 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == CBaseChainParams::MAIN)
-            optionFile << "Name=Litecoin\n";
+            optionFile << "Name=Vuicoin\n";
         else
-            optionFile << strprintf("Name=Litecoin (%s)\n", chain);
+            optionFile << strprintf("Name=Vuicoin (%s)\n", chain);
         optionFile << "Exec=" << pszExePath << strprintf(" -min -chain=%s\n", chain);
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";

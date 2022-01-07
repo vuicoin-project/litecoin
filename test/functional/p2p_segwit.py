@@ -556,7 +556,7 @@ class SegWitTest(BitcoinTestFramework):
             # 'non-mandatory-script-verify-flag (Witness program was passed an
             # empty witness)' (otherwise).
             # TODO: support multiple acceptable reject reasons.
-            # Litecoin: BTC applied these rules for all transactions once P2SH is enabled, on LTC we enforce
+            # Vuicoin: BTC applied these rules for all transactions once P2SH is enabled, on VUI we enforce
             # these rules only when segwit was activated
             # test_witness_block(self.nodes[0], self.test_node, block, accepted=False, with_witness=False)
 
